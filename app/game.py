@@ -23,16 +23,6 @@ print("COMPUTER CHOICE:", c)
 # DETERMINATION OF WINNER
 #
 
-if u== "rock":
-    if c == "rock":
-        print("It's a tie!")
-    elif c == "paper":
-        print("You lose!")
-    elif c == "scissors":
-        print("okay")
-
-#There are even less ways either using a dictionary or tuple approqach 
-
 winning = {'paper':'scissors','rock':'paper','scissors':'rock'}
 
 
