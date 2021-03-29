@@ -5,8 +5,16 @@ from pandas import read_csv
 
 
 def format_usd(my_price):
-    return f"${my_price:,.2f}"
+    """
+    Formats numbers in USD with a $ and two decimals (and thousands separator)
+    Params: 
+        my_price (numeric, like int or float) that we want to format
 
+    Example: 
+        format_price(8.5433)
+        format_price(8)
+   """
+    return f"${my_price:,.2f}"
     
 # READ INVENTORY OF PRODUCTS
 
@@ -29,7 +37,6 @@ while True:
             print("OOPS, Couldn't find that product. Please try again.")
 
 checkout_at = datetime.now()
-
 subtotal = sum([float(p["price"]) for p in selected_products])
 
 # PRINT RECEIPT
@@ -49,32 +56,21 @@ print("THANK YOU! PLEASE COME AGAIN SOON!")
 print("---------")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # WRITE RECEIPT TO FILE
 
 receipt_id = checkout_at.strftime('%Y-%M-%d-%H-%m-%S')
 receipt_filepath = os.path.join(os.path.dirname(__file__), "..", "receipts", f"{receipt_id}.txt")
 
 with open(receipt_filepath, "w") as receipt_file:
-    receipt_file.write("------------------------------------------")
+    receipt_file.write("CHECKOUT AT: " + str(checkout_at.strftime("%Y-%M-%d %H:%m:%S")))
+    receipt_file.write("\n------------------------------------------")
     for p in selected_products:
         receipt_file.write("\nSELECTED PRODUCT: " + p["name"] + "   " + format_usd(p["price"]))
 
     receipt_file.write("\n---------")
-    receipt_file.write(f"\nSUBTOTAL: {subtotal}")
-    receipt_file.write(f"\nTAX: {subtotal * 0.875}")
-    receipt_file.write(f"\nTOTAL: {((subtotal * 0.875) + subtotal)}")
+    receipt_file.write(f"\nSUBTOTAL: {format_usd(subtotal)}")
+    receipt_file.write(f"\nTAX: {format_usd(subtotal * 0.0875)}")
+    receipt_file.write(f"\nTOTAL: {format_usd((subtotal * 0.0875) + subtotal)}")
     receipt_file.write("\n---------")
     receipt_file.write("\nTHANK YOU! PLEASE COME AGAIN SOON!")
     receipt_file.write("\n---------")
