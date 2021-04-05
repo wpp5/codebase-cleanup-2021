@@ -1,5 +1,6 @@
 
 from app.shopping import format_usd
+from app.shopping import calculate_tax
 
 def test_format_usd():
     assert format_usd(3.75838) == "$3.76"
