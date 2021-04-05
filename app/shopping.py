@@ -2,8 +2,6 @@ import os
 from datetime import datetime
 from pandas import read_csv
 
-
-
 def format_usd(my_price):
     """
     Formats numbers in USD with a $ and two decimals (and thousands separator)
@@ -15,6 +13,20 @@ def format_usd(my_price):
         format_price(8)
    """
     return f"${my_price:,.2f}"
+
+def calculate_tax(subtotal):
+    """
+    Calculates the tax for the receipt
+    Params:
+        subtotal (numeric, like int or float) that we want to calculate tax on
+
+    Example:
+        calculate_tax(10.35)
+        calculate_tax(10)
+
+    """
+    return format_usd(0.875*subtotal)
+
     
 # READ INVENTORY OF PRODUCTS
 
@@ -49,7 +61,7 @@ for p in selected_products:
 
 print("---------")
 print(f"SUBTOTAL: {format_usd(subtotal)}")
-print(f"TAX: {format_usd(subtotal * 0.0875)}")
+print("TAX:",calculate_tax(subtotal))
 print(f"TOTAL: {format_usd((subtotal * 0.0875) + subtotal)}")
 print("---------")
 print("THANK YOU! PLEASE COME AGAIN SOON!")
@@ -69,7 +81,7 @@ with open(receipt_filepath, "w") as receipt_file:
 
     receipt_file.write("\n---------")
     receipt_file.write(f"\nSUBTOTAL: {format_usd(subtotal)}")
-    receipt_file.write(f"\nTAX: {format_usd(subtotal * 0.0875)}")
+    receipt_file.write("TAX:",calculate_tax(subtotal))
     receipt_file.write(f"\nTOTAL: {format_usd((subtotal * 0.0875) + subtotal)}")
     receipt_file.write("\n---------")
     receipt_file.write("\nTHANK YOU! PLEASE COME AGAIN SOON!")
