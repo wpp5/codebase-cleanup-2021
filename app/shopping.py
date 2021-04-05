@@ -14,23 +14,20 @@ def format_usd(my_price):
    """
     return f"${my_price:,.2f}"
 
-#PREVENT APP CODE FROM BEING IMPORTED
+def calculate_tax(subtotal):
+    """
+    Calculates the tax for the receipt
+    Params:
+        subtotal (numeric, like int or float) that we want to calculate tax on
+
+    Example:
+        calculate_tax(10.35)
+        calculate_tax(10)
+
+    """
+    return "TAX: "+format_usd(0.0875*subtotal)
+
 if __name__ == "__main__":
-
-    def calculate_tax(subtotal):
-        """
-        Calculates the tax for the receipt
-        Params:
-            subtotal (numeric, like int or float) that we want to calculate tax on
-
-        Example:
-            calculate_tax(10.35)
-            calculate_tax(10)
-
-        """
-        return "TAX: "+format_usd(0.0875*subtotal)
-
-        
     # READ INVENTORY OF PRODUCTS
 
     products_filepath = os.path.join(os.path.dirname(__file__), "..", "data", "products.csv")
