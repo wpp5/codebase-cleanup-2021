@@ -27,6 +27,22 @@ def calculate_tax(subtotal):
     """
     return "TAX: "+format_usd(0.0875*subtotal)
 
+def lookup_product(product_id,all_products):
+
+    """
+    Function to lookup products in the csv file and return content
+    Params: product_id is str value 
+            all_products is a list of dictionaties with each containing "id","name","department","aisle",and "price"
+    Examples:
+        lookup_product("8",{'aisle': 'Aisle C','deparment': 'snacks','id': '8','name':'Product 8','price': 10.0})
+    """
+    matching_products = [p for p in all_products if str(p["id"]) == str(product_id)]
+    if any(matching_products):
+        return matching_products[0]
+    else:
+        return None
+
+
 if __name__ == "__main__":
     # READ INVENTORY OF PRODUCTS
 
@@ -43,9 +59,9 @@ if __name__ == "__main__":
         if selected_id.upper() == "DONE":
             break
         else:
-            matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+            matching_products = lookup_product(selected_id, products)
             if any(matching_products):
-                selected_products.append(matching_products[0])
+                selected_products.append(matching_products)
             else:
                 print("OOPS, Couldn't find that product. Please try again.")
 
