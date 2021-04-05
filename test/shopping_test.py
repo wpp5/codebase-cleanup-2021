@@ -6,4 +6,4 @@ def test_format_usd():
     assert format_usd(1000000) == "$1,000,000.00"
 
 
-
+print("test")
