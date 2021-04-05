@@ -1,34 +1,50 @@
-
 from random import choice
 
-#
-# USER SELECTION
-#
+def determine_winner(u,c):
 
-VALID_OPTIONS = ["rock","paper","scissors"]
-u = input("Please choose one of 'Rock', 'Paper', or 'Scissors': ").lower()
-print("USER CHOICE:", u)
-if u not in VALID_OPTIONS:
-    print("OOPS, TRY AGAIN")
-    exit()
+    """
+    Determines the winner of RPS, outputs winning choice, and prints a win, loss, or tie statement
+    Param: both u and c will be string values either "rock","paper", or "scissors"
 
-#
-# COMPUTER SELECTION
-#
+    Examples:
+    determine_winner("rock","paper")
+    determine_winner("rock","rock")
+    """
 
-c = choice(VALID_OPTIONS)
-print("COMPUTER CHOICE:", c)
+    winning = {'paper':'scissors','rock':'paper','scissors':'rock'}
 
-#
-# DETERMINATION OF WINNER
-#
+    if u == winning[c]:
+        winner = u
+        print("YOU WIN!")
 
-winning = {'paper':'scissors','rock':'paper','scissors':'rock'}
+    elif c == winning[u]:
+        winner = c
+        print("YOU LOSE!")
+
+    else:
+        winner = "tie"
+        print("IT'S A TIE!")
 
 
-if u == winning[c]:
-    print("You win!",u,'beats',c)
-elif c == winning[u]:
-    print("You lose!",c,'beats',u)
-else:
-    print("You both chose",c,". It's a tie!")
+    return winner 
+
+if __name__ == '__main__':
+        
+    # USER SELECTION
+    #
+
+    VALID_OPTIONS = ["rock","paper","scissors"]
+    u = input("Please choose one of 'Rock', 'Paper', or 'Scissors': ").lower()
+    print("USER CHOICE:", u)
+    if u not in VALID_OPTIONS:
+        print("OOPS, TRY AGAIN")
+        exit()
+
+    #
+    # COMPUTER SELECTION
+    #
+
+    c = choice(VALID_OPTIONS)
+    print("COMPUTER CHOICE:", c)
+
+    winner = determine_winner(u,c)

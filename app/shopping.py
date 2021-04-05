@@ -28,7 +28,7 @@ if __name__ == "__main__":
             calculate_tax(10)
 
         """
-        return "TAX: "+format_usd(0.875*subtotal)
+        return "TAX: "+format_usd(0.0875*subtotal)
 
         
     # READ INVENTORY OF PRODUCTS
@@ -53,7 +53,7 @@ if __name__ == "__main__":
                 print("OOPS, Couldn't find that product. Please try again.")
 
     checkout_at = datetime.now()
-    receipt_id = checkout_at.strftime('%Y-%M-%d-%H-%m-%S')
+    receipt_id = checkout_at.strftime('%Y-%m-%d-%H-%M-%S')
 
     subtotal = sum([float(p["price"]) for p in selected_products])
 
